@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# eve build output and local runtime state
+.eve/
+.output/
+.next/
+
+# Environment — the Zoho MCP URL and any keys live here
+.env
+.env.*
+!.env.example
+
+# Local data (outreach log)
+data/
+
+# Misc
+*.log
+.DS_Store
+tsconfig.tsbuildinfo

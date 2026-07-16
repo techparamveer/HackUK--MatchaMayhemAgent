@@ -1,0 +1,41 @@
+{
+  "name": "matcha-mayhem-agent",
+  "version": "1.0.0",
+  "description": "HackUK's Matcha Mayhem outreach agent, built on eve.",
+  "scripts": {
+    "dev": "eve dev",
+    "build": "eve build",
+    "start": "eve start",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/techparamveer/HackUK--MatchaMayhemAgent.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/techparamveer/HackUK--MatchaMayhemAgent/issues"
+  },
+  "homepage": "https://github.com/techparamveer/HackUK--MatchaMayhemAgent#readme",
+  "engines": {
+    "node": "24.x"
+  },
+  "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.15",
+    "@ai-sdk/openai-compatible": "^3.0.11",
+    "@vercel/connect": "0.2.2",
+    "ai": "^7.0.26",
+    "ai-sdk-provider-claude-code": "^4.0.1",
+    "ai-sdk-provider-codex-cli": "^2.1.1",
+    "eve": "^0.24.6",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "microsandbox": "^0.5.10",
+    "typescript": "^5.9.3"
+  }
+}
