@@ -6,7 +6,8 @@
     "dev": "eve dev",
     "build": "eve build",
     "start": "eve start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"lib/**/*.test.ts\""
   },
   "repository": {
     "type": "git",
