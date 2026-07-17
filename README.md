@@ -22,6 +22,11 @@ Model calls run off your own credentials, selected with `MODEL_BACKEND`:
 | `claude-code` | Claude subscription | [`ai-sdk-provider-claude-code`](https://github.com/ben-vargas/ai-sdk-provider-claude-code) drives the `claude` CLI | ⚠️ The Claude Code harness executes tools itself, so eve-authored tools are not visible to the model; the Zoho Mail MCP server is handed straight to the harness instead |
 | `anthropic` | Your own endpoint/key | `@ai-sdk/anthropic` pointed at `ANTHROPIC_BASE_URL` (defaults to api.anthropic.com) | ✅ Full support |
 
+When `MODEL_BACKEND` is not set, the agent uses `local` if
+`LOCAL_ENDPOINT_URL` is configured and falls back to `codex` otherwise (so a
+bare checkout still builds). The bundled `.env.example` sets
+`MODEL_BACKEND=local` explicitly.
+
 The `codex` and `claude-code` backends read local CLI logins, so they work in
 local development and on any machine where you have signed in — they will not
 work on a stateless deployment. For deployed environments use the `anthropic`
@@ -56,6 +61,9 @@ backend with your own endpoint.
    # then set ZOHO_MCP_URL (and MODEL_BACKEND / MODEL_ID if you like)
    ```
 
+   `ZOHO_MCP_URL` is required — the agent refuses to start without it, by
+   design, rather than failing later mid-conversation.
+
 ## Run it
 
 ```bash
@@ -82,18 +90,28 @@ tool use in a session pauses and asks before anything leaves the building.
 
 ```
 agent/
-  agent.ts                   # model backend switch (no AI Gateway)
-  instructions.md            # the outreach persona — British English throughout
-  channels/eve.ts            # built-in HTTP channel + auth
-  connections/zoho_mail.ts   # Zoho Mail via Zoho's official MCP server
-  skills/email_templates.md  # house email templates the model loads on demand
-  tools/log_outreach.ts      # record every contact in the outreach log
-  tools/list_outreach.ts     # check the log before emailing anyone
-lib/outreach-store.ts        # JSON-backed store at data/outreach.json (gitignored)
-docs/mini-hack-venues.md     # café shortlist for the in-person mini hack
+  agent.ts                    # model backend switch (no AI Gateway)
+  instructions.md             # the outreach persona — British English throughout
+  channels/eve.ts             # built-in HTTP channel + auth
+  connections/zoho-mail.ts    # Zoho Mail via Zoho's official MCP server
+  skills/email_templates.md   # house email templates the model loads on demand
+  skills/mini_hack_venues.md  # café shortlist for the in-person mini hack
+  tools/log_outreach.ts       # record every contact in the outreach log
+  tools/list_outreach.ts      # check the log before emailing anyone
+lib/outreach-store.ts         # JSON-backed store at data/outreach.json (gitignored)
+lib/outreach-store.test.ts    # unit tests — run with `npm test`
 ```
 
 The full eve docs are bundled at `node_modules/eve/docs/` once installed.
+
+## Checks
+
+```bash
+npm run typecheck   # tsc --noEmit
+npm test            # unit tests for the outreach store (Node's built-in runner)
+```
+
+Both run in CI (`.github/workflows/ci.yml`) on every push and pull request.
 
 ## House style
 
