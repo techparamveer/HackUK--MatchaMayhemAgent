@@ -8,8 +8,21 @@ import { once } from "eve/tools/approval";
  * is itself the credential — treat it like a password and keep it in
  * ZOHO_MCP_URL, never in source control.
  */
+const url = process.env.ZOHO_MCP_URL;
+if (!url) {
+  // Fail at startup rather than mid-conversation: a placeholder URL here
+  // would let the agent boot fine and then produce baffling MCP errors the
+  // first time it tries to touch the inbox.
+  throw new Error(
+    "ZOHO_MCP_URL is not set. Create an MCP endpoint for the HackUK Zoho " +
+      "Mail account in the Zoho MCP console (https://mcp.zoho.com) and put " +
+      "the generated URL in .env — the URL itself is the credential, so " +
+      "treat it like a password and never commit it.",
+  );
+}
+
 export default defineMcpClientConnection({
-  url: process.env.ZOHO_MCP_URL ?? "https://mcp.zoho.com/not-configured",
+  url,
   description:
     "HackUK's Zoho Mail account. Send outreach emails, read and search the " +
     "inbox, manage drafts, folders, labels and the signature. Use this for " +
