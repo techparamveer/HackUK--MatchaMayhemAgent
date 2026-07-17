@@ -79,7 +79,7 @@ function pickModel(): LanguageModel {
 
     default:
       throw new Error(
-        `Unknown MODEL_BACKEND "${backend}". Use "codex", "claude-code" or "anthropic".`,
+        `Unknown MODEL_BACKEND "${backend}". Use "local", "codex", "claude-code" or "anthropic".`,
       );
   }
 }

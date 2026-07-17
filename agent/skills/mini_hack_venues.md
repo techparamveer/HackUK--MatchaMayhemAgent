@@ -1,3 +1,7 @@
+---
+description: Use when planning the in-person Matcha Mayhem mini hack or drafting venue enquiry emails — the café shortlist for London and Manchester with capacities, cost signals and booking notes.
+---
+
 # Matcha Mayhem mini hack — café venue shortlist
 
 Cafés and café-style spaces that can hold roughly **20–30 people** and are
